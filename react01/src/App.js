@@ -1,41 +1,41 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const Sobre = ({ nome, cargo, idade}) => {
-  return (
-    <>
-      <h2>Olá sou(a) {nome} </h2>
-      <h3>Cargo: {cargo} </h3>
-      <h3>Idade: {idade} </h3>
-    </>
-  );
+class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      nome: 'Gabriel',
+      contador: 0
+    };
+
+    this.aumentar = this.aumentar.bind(this)
+    this.diminuir = this.diminuir.bind(this)
+  }
+
+  diminuir(){
+    let state = this.state; 
+    state.contador--; 
+    this.setState(state)
+  }
+
+  aumentar(){
+    let state = this.state; //todos os estados
+    state.contador++; // alterando apenas o estado 'contador'
+    this.setState(state)
+  }
+
+  render(){
+    return (
+      <div>
+        <h2>Contador</h2>
+        <h3>
+           <button onClick={this.diminuir}>-</button> 
+           {this.state.contador} 
+           <button onClick={this.aumentar} >+</button>
+           </h3>
+      </div>
+    )
+  }
 };
 
-const Social = ({ insta }) => {
-  return (
-    <>
-     <a href="#">Linkedin</a>
-     <a href={insta}>Instagran</a>
-     <a href="#">Github</a>
-    </>
-  );
-};
-
-const Equipe = ({ nome, cargo, idade, instagran}) => {
-  return (
-    <>
-      <Sobre nome={nome} cargo={cargo} idade={idade}/>
-      <Social insta={instagran}/>
-    </>
-  );
-};
-
-export default function App() {
-  return (
-    <>
-      <h1>Conheça Nossa Equipe</h1>
-      <br/>
-      <Equipe nome="gabriel" cargo="Programador" idade="26" instagran="https://www.instagram.com/" />
-      <Equipe nome="pedro" cargo="engenheiro" idade="29" />
-    </>
-  )
-};
+export default App;
